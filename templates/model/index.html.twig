@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div>
+		<h1 class="text-center">Liste des marques</h1>
+	</div>
+	<div class="container">
+		<div>
+			<button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Ajouter une marque 😁</button>
+		</div>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th scope="col">Num</th>
+					<th scope="col">Nom</th>
+					<th scope="col">Prix depart</th>
+					<th scope="col">marque</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for model in models %}
+					<tr>
+						<th scope="row">{{ model.id }}</th>
+						<td>{{ model.nom }}</td>
+						<td>{{model.prixDepart}}</td>
+						<td>Ici IMG</td>
+						<td>
+							<a class='text-decoration-none' id='btn-view' href="{{path('model', {'id': model.id})}}">
+								<button class="btn btn-outline-info" >👀</button>
+							</a>
+							<a class='text-decoration-none' href="{{path('model_delete', {'id': model.id})}}">
+								<button class="btn btn-outline-danger">❌</button>
+							</a>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="4" class="text-center">Pas de marques Mr 😑</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+	<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<form method="post" action="" enctype="multipart/form-data">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5" id="staticBackdropLabel">Ajouter un modèle</h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						{{ form(ajout) }}
+
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-success">Sauvegarder</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div class="container w-50">
+		<div class="py-5 text-center">
+			<p class="lead">Modifier votre model : {{UnModel.nom}}</p>
+		</div>
+
+		<div class="row g-5">
+			<div class="col-md-4 col-lg-4 order-md-last">
+				<h4 class="d-flex justify-content-between align-items-center mb-3">
+					<span class="text-primary">Le modèle
+					</span>
+				</h4>
+				<ul class="list-group mb-3">
+					<li class="list-group-item d-flex justify-content-between lh-sm">
+						<div>
+							<h6 class="my-0">Nom
+							</h6>
+						</div>
+						<span class="text-muted">{{UnModel.nom}}</span>
+					</li>
+					<li class="list-group-item d-flex justify-content-between lh-sm">
+						<div>
+							<h6 class="my-0">Prix
+							</h6>
+						</div>
+						<span class="text-muted">{{UnModel.prixDepart}}</span>
+					</li>
+				</ul>
+			</div>
+			<div class="col-md-7 col-lg-7 order-md-last">
+				<h4 class="d-flex justify-content-between align-items-center mb-3">
+					<span class="text-primary">Modifications
+					</span>
+				</h4>
+                {{form(edit)}}
+			</div>
+		</div>
+	</div>
+{% endblock %}

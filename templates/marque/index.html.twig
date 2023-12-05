@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}APP Kidd
+{% endblock %}
+
+{% block body %}
+	<div>
+		<h1 class="text-center">Liste des marques</h1>
+	</div>
+	<div class="container">
+		<div>
+			<button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Ajouter une marque 😁</button>
+		</div>
+		<table class="table table-striped text-center">
+			<thead>
+				<tr>
+					<th scope="col">Logo Marque</th>
+					<th scope="col">Nom</th>
+					<th scope="col">Date création</th>
+					<th scope="col">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for marque in marques %}
+					<tr>
+						<td class="w-25">
+							{% if marque.logo is defined and marque.logo is not empty %}
+								<img src="{{ asset('uploads/' ~ marque.logo) }}" class="img-fluid img-thumbnail w-25" alt="...">
+							{% else %}
+								Pas d'images désolé 😂😂😂😂
+							{% endif %}
+						</td>
+						<td>{{ marque.nom }}</td>
+						<td class="w-25"><input type="date" value="{{marque.dateCreation|date('Y-m-d')}}" class="form-control text-center" readonly="readonly"></td>
+						<td>
+							<a class='text-decoration-none' id='btn-view' href="{{path('marque', {'id': marque.id})}}">
+								<button class="btn btn-outline-info">👀</button>
+							</a>
+							<a class='text-decoration-none' href="{{path('marque_delete', {'id': marque.id})}}">
+								<button class="btn btn-outline-danger">❌</button>
+							</a>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="4" class="text-center">Pas de marques Mr 😑</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+
+
+		</table>
+	</div>
+	<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<form method="post" action="" enctype="multipart/form-data">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5" id="staticBackdropLabel">Ajouter une marque</h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						{{ form(ajout) }}
+
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-success">Sauvegarder</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	{% endblock %}
